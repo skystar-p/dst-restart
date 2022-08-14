@@ -19,7 +19,15 @@ func restartHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// TODO
-	run("touch /tmp/restart")
+	if err := run("touch /tmp/restart"); err != nil {
+		errMsg := "command error"
+		logrus.Error(errMsg)
+		http.Error(w, errMsg, http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("OK"))
 }
 
 func checkBasicAuthCredential(w http.ResponseWriter, r *http.Request) (bool, string) {
