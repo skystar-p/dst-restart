@@ -8,7 +8,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-
 func restartHandler(w http.ResponseWriter, r *http.Request) {
 	if config.EnableBasicAuth {
 		ok, errMsg := checkBasicAuthCredential(w, r)
@@ -20,6 +19,7 @@ func restartHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// TODO
+	run("touch /tmp/restart")
 }
 
 func checkBasicAuthCredential(w http.ResponseWriter, r *http.Request) (bool, string) {
