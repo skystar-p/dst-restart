@@ -18,8 +18,7 @@ func restartHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// TODO
-	if err := run("touch /tmp/restart"); err != nil {
+	if err := run("docker restart dst"); err != nil {
 		errMsg := "command error"
 		logrus.Error(errMsg)
 		http.Error(w, errMsg, http.StatusInternalServerError)
